@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] Rigidbody rb;
+    [SerializeField] float force;
 
-    // Update is called once per frame
+    Vector3 direction;
     void Update()
     {
-        
+        direction = new Vector3(
+            Input.GetAxis("Horizontal"),
+            0,
+            Input.GetAxis("Vertical")
+        );
+    }
+
+    void FixedUpdate()
+    {
+        if(direction == Vector3.zero)
+            return;
+
+        rb.AddForce(direction * force);
     }
 }
