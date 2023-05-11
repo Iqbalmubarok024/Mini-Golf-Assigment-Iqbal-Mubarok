@@ -17,6 +17,9 @@ public class CameraController : MonoBehaviour
         {
             CMFrelook.m_XAxis.m_InputAxisName = "";
             CMFrelook.m_YAxis.m_InputAxisName = "";
+
+            CMFrelook.m_XAxis.m_InputAxisValue = 0;
+            CMFrelook.m_YAxis.m_InputAxisValue = 0;
         }
     }
 }

@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] CameraController camController;
     private void Update()
     {
-        camController.SetInputActive(Input.GetMouseButton(0));
+        var inputActive = Input.GetMouseButton(0) && ballController.IsMove() == false;
+        camController.SetInputActive(inputActive);
     }
 }
