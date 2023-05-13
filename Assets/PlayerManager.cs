@@ -1,16 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] BallController ballController;
     [SerializeField] CameraController camController;
+    [SerializeField] GameObject finishWindow;
+    [SerializeField] TMP_Text finishText;
+    [SerializeField] TMP_Text shootCountText;
+    [SerializeField] int travelDistance;
+    [SerializeField] private int coin;
 
+    public UnityEvent<int> OnScoreUpdate;
     bool isBallOutside;
     bool isBallTeleporting;
     bool isGoal;
     Vector3 lastBallPosition;
+
+    private void OnEnable()
+    {
+        ballController.onBallShooted.AddListener(UpdateShootCount);
+    }
+
+    private void OnDisable()
+    {
+        ballController.onBallShooted.RemoveListener(UpdateShootCount);
+    }
     private void Update()
     {
         if(ballController.ShootingMode)
@@ -29,7 +47,10 @@ public class PlayerManager : MonoBehaviour
     {
         isGoal = true;
         ballController.enabled = false;
-        //TODO window player win window poip
+
+        // window player win window poup
+        finishWindow.gameObject.SetActive(true);
+        finishText.text = "Chip In!!!\n" + "Shoot Count: " + ballController.ShootCount;
     }
 
     public void OnBallOutside()
@@ -60,4 +81,20 @@ public class PlayerManager : MonoBehaviour
         isBallOutside = false;
         isBallTeleporting = false;
     }
+
+    public void UpdateShootCount(int shootCount)
+    {
+        shootCountText.text = shootCount.ToString();
+    }
+
+    public void AddCoin(int value = 1)
+    {
+        this.coin += value;
+        OnScoreUpdate.Invoke(GetScore());
+    }
+
+   private int GetScore()
+   {
+        return travelDistance + coin;
+   }
 }
