@@ -24,18 +24,4 @@ public class NextLevelButton : MonoBehaviour
         SceneManager.LoadScene("Level_"+ nextLevel);
     }
 
-    public void Replay()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-	public void GantiScene(string scene_name)
-	{
-		SceneManager.LoadScene(scene_name);
-	}
-
-    public void Quit()
-    {
-        Application.Quit();
-    }
 }

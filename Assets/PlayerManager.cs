@@ -46,7 +46,7 @@ public class PlayerManager : MonoBehaviour
 
         // window player win window poup
         finishWindow.gameObject.SetActive(true);
-        finishText.text = "Chip In!!!\n" + "Shoot Count: " + ballController.ShootCount;
+        finishText.text = "Level Complete\n" + "Shoot Count: " + ballController.ShootCount;
     }
 
     public void OnBallOutside()
