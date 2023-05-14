@@ -25,9 +25,6 @@ public class BallController : MonoBehaviour , IPointerDownHandler
     public int ShootCount { get => shootCount; }
 
     public UnityEvent<int> onBallShooted = new UnityEvent<int>();
-    
-    public int AddCoin { get => AddCoin; }
-    public UnityEvent<int> OnGetCoin;
 
     private void Update()
     {
@@ -119,14 +116,4 @@ public class BallController : MonoBehaviour , IPointerDownHandler
         shootingMode = true;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Coin"))
-            {
-                var coin = other.GetComponent<Coin>();
-                OnGetCoin.Invoke(coin.Value);
-                coin.Collected();
-
-            }
-    }
 }

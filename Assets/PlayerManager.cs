@@ -11,10 +11,6 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] GameObject finishWindow;
     [SerializeField] TMP_Text finishText;
     [SerializeField] TMP_Text shootCountText;
-    [SerializeField] int travelDistance;
-    [SerializeField] private int coin;
-
-    public UnityEvent<int> OnScoreUpdate;
     bool isBallOutside;
     bool isBallTeleporting;
     bool isGoal;
@@ -87,14 +83,4 @@ public class PlayerManager : MonoBehaviour
         shootCountText.text = shootCount.ToString();
     }
 
-    public void AddCoin(int value = 1)
-    {
-        this.coin += value;
-        OnScoreUpdate.Invoke(GetScore());
-    }
-
-   private int GetScore()
-   {
-        return travelDistance + coin;
-   }
 }
